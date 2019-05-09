@@ -1,3 +1,0 @@
-# Summary
-
-The project has answered how HDB prices are affected by the opening of a new MRT station, and the distance to MRT station from the housing unit is significant. K means clustering has some promising results to examine the factors that affect the street level. 

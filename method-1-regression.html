@@ -5,24 +5,24 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 5 Method 1 - Regression | A Minimal Book Example</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <title>Chapter 5 Method 1 - Regression | A Study on HDB Resale Prices for new Downtown Line Stations</title>
+  <meta name="description" content="Bookdown Version of Final Project Submission">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 5 Method 1 - Regression | A Minimal Book Example" />
+  <meta property="og:title" content="Chapter 5 Method 1 - Regression | A Study on HDB Resale Prices for new Downtown Line Stations" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta property="og:description" content="Bookdown Version of Final Project Submission" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Method 1 - Regression | A Minimal Book Example" />
+  <meta name="twitter:title" content="Chapter 5 Method 1 - Regression | A Study on HDB Resale Prices for new Downtown Line Stations" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="twitter:description" content="Bookdown Version of Final Project Submission" />
   
 
-<meta name="author" content="Yihui Xie">
+<meta name="author" content="Alex Ng">
 
 
 <meta name="date" content="2019-05-04">
@@ -104,7 +104,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Abstract</a></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
 <li class="chapter" data-level="3" data-path="literature-review.html"><a href="literature-review.html"><i class="fa fa-check"></i><b>3</b> Literature Review</a></li>
 <li class="chapter" data-level="4" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics</a><ul>
@@ -116,12 +116,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.1.1" data-path="method-1-regression.html"><a href="method-1-regression.html#coefficients"><i class="fa fa-check"></i><b>5.1.1</b> Coefficients</a></li>
 <li class="chapter" data-level="5.1.2" data-path="method-1-regression.html"><a href="method-1-regression.html#residuals"><i class="fa fa-check"></i><b>5.1.2</b> Residuals</a></li>
 </ul></li>
+<li class="chapter" data-level="5.2" data-path="method-1-regression.html"><a href="method-1-regression.html#log-linear-regression"><i class="fa fa-check"></i><b>5.2</b> Log-Linear Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="method-2-clustering.html"><a href="method-2-clustering.html"><i class="fa fa-check"></i><b>6</b> Method 2 - Clustering</a></li>
+<li class="chapter" data-level="6" data-path="method-2-clustering.html"><a href="method-2-clustering.html"><i class="fa fa-check"></i><b>6</b> Method 2 - Clustering</a><ul>
+<li class="chapter" data-level="6.1" data-path="method-2-clustering.html"><a href="method-2-clustering.html#factor-loadings"><i class="fa fa-check"></i><b>6.1</b> Factor Loadings</a></li>
+<li class="chapter" data-level="6.2" data-path="method-2-clustering.html"><a href="method-2-clustering.html#cluster-analysis"><i class="fa fa-check"></i><b>6.2</b> Cluster Analysis</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>7</b> Discussion</a><ul>
 <li class="chapter" data-level="7.1" data-path="discussion.html"><a href="discussion.html#strengths"><i class="fa fa-check"></i><b>7.1</b> Strengths</a></li>
 <li class="chapter" data-level="7.2" data-path="discussion.html"><a href="discussion.html#weaknesses"><i class="fa fa-check"></i><b>7.2</b> Weaknesses</a></li>
-<li class="chapter" data-level="7.3" data-path="discussion.html"><a href="discussion.html#possible-further-studies"><i class="fa fa-check"></i><b>7.3</b> Possible Further Studies</a></li>
+<li class="chapter" data-level="7.3" data-path="discussion.html"><a href="discussion.html#opportunities-for-further-studies"><i class="fa fa-check"></i><b>7.3</b> Opportunities for Further Studies</a></li>
+<li class="chapter" data-level="7.4" data-path="discussion.html"><a href="discussion.html#threats"><i class="fa fa-check"></i><b>7.4</b> Threats</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>8</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -137,7 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Study on HDB Resale Prices for new Downtown Line Stations</a>
           </h1>
         </div>
 
@@ -555,17 +560,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 bp_ols_p1_re <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> .resid)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">50</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Residuals Base Model BP Period 1&quot;</span>)</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bp_ols_p2_re &lt;-<span class="st"> </span><span class="kw">augment</span>(bp_ols_p2, <span class="dt">data =</span> data_bp_p2)
 bp_ols_p2_re <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> .resid)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">50</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Residuals Base Model BP Period 2&quot;</span>)</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bp_ols_p3_re &lt;-<span class="st"> </span><span class="kw">augment</span>(bp_ols_p3, <span class="dt">data =</span> data_bp_p3)
 bp_ols_p3_re <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> .resid)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">50</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Residuals Base Model BP Period 3&quot;</span>)</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-20-1.png" width="672" /> <img src="bookdown-demo_files/figure-html/unnamed-chunk-21-1.png" width="672" /> <img src="bookdown-demo_files/figure-html/unnamed-chunk-22-1.png" width="672" /> <img src="bookdown-demo_files/figure-html/unnamed-chunk-23-1.png" width="672" /> The residuals for BP base models are close to a normal distribution. For period 3, the is a smaller dataset available since opening of the BP MRT, which make outliers stands out as it does not spread out as much.</p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" width="672" /> <img src="bookdown-demo_files/figure-html/unnamed-chunk-19-1.png" width="672" /> <img src="bookdown-demo_files/figure-html/unnamed-chunk-20-1.png" width="672" /> <img src="bookdown-demo_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>The residuals for BP base models are close to a normal distribution. For period 3, the is a smaller dataset available since opening of the BP MRT, which make outliers stands out as it does not spread out as much.</p>
+</div>
+</div>
+<div id="log-linear-regression" class="section level2">
+<h2><span class="header-section-number">5.2</span> Log-Linear Regression</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bp_data_cont_p &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(resale_price) <span class="op">~</span><span class="st"> </span>floor_area_sqm <span class="op">+</span><span class="st"> </span>period <span class="op">+</span><span class="st"> </span>connected <span class="op">+</span><span class="st"> </span>near_pop_sch <span class="op">+</span><span class="st"> </span>distance_towncentre <span class="op">+</span><span class="st"> </span>park <span class="op">+</span><span class="st"> </span>flat_type <span class="op">+</span><span class="st"> </span>storey <span class="op">+</span><span class="st"> </span>lease_remaining, data_bp)
 
 tamp_data_cont_p &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(resale_price) <span class="op">~</span><span class="st"> </span>floor_area_sqm <span class="op">+</span><span class="st"> </span>period <span class="op">+</span><span class="st"> </span>connected <span class="op">+</span><span class="st"> </span>near_pop_sch <span class="op">+</span><span class="st"> </span>distance_towncentre <span class="op">+</span><span class="st"> </span>park <span class="op">+</span><span class="st"> </span>flat_type <span class="op">+</span><span class="st"> </span>storey <span class="op">+</span><span class="st"> </span>lease_remaining, data_tamp)
@@ -1000,9 +1010,8 @@ tamp_data_cat_p &lt;-<span class="st"> </span><span class="kw">lm</span>(<span c
 </tbody>
 </table>
 <p>Note: *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</p>
-<p>The log-linear regression provides us the coefficients with the percentage change of the variable with respect to resale price. Hence, connected to MRT station for Bukit Panjang</p>
+<p>The log-linear regression provides us the coefficients with the percentage change of the variable with respect to resale price. In ( 1) and (3), the period are taken as continuous variables. In (2) and (4), a new variable per is created with “one” meaning period 1 the base, “two” for period 2 and “three” for period 3. Resale prices for HDB connected to MRT station for Bukit Panjang has increased by an average of 14.6% from each increment of period. The change of 14.3% for Tampines which is comparable. The popular primary school coefficient is small at 0.5% and 0.4% for the continuous and categorical type of analysis. The level of signifiance is at 5%. Lease remaining for Bukit Panjang is 0.8%-0.9% and Tampines 0.5% for every year which is not a surpise as HDB has a fixed lease. Categorical per for BP from period 1 to 2 is 23.5% and period 2 and 3 is 21.6%. This shows the effect from pre-construction to construction is higher than construction to completion, because buyers could see the potential benefit of buying the flat. The coefficient for Tampines is 21.3% and 21.1% that is very stable regradless of the period. On whether being near the MRT has increase the price, Tampines has proven to be true with 1% increase. BP is a fall in 3.7% or 4.2%. This could be the effect of noise or main road which might deter potential buyers. For distance to town centre, the coefficients are negative. Being near town centre may not gain much benefits from HDB flat prices. Reasons include the higher human and road traffic passing through the homes that discourage buyers. The noise generated being near the MRT track for the East West Tampines or North South Choa Chu Kang line may also lowered the price.</p>
 
-</div>
 </div>
 </div>
             </section>
@@ -1056,19 +1065,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
