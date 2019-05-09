@@ -1,0 +1,131 @@
+# Descriptive Statistics
+
+## Dataset
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+I have chosen four MRT stations to investigate namely Bukit Panjang, Tampines West, Tampines and Tampines East on the Downtown Line. The dataset is obtained by merging three of the tables found from Data@Gov. The filter was applied to obtain transactions located in districts of Bukit Panjang and Tampines. For Tampines, addresses in Simei are excluded as they are near to Simei MRT on the East West Line. This will reduce the number of transactions to analyse as the study focus on Tampines West ("TW"), Tampines ("T") and Tampines East ("TE").
+
+|    Stage/Period         |    Pre-construction    (period = 1)    |    Construction   (period = 2)    |    Completion   (period = 3)    |
+|-------------------------|----------------------------------------|-----------------------------------|---------------------------------|
+|    Stage 2 BP           |    Jan 2009 to Jun 2011                |    Jul 2011 to Dec 2015           |    Jan 2016 to Dec 2018         |
+|    Stage 3 TW, T, TE    |    Jan 2009 to Oct 2011                |    Nov 2011 to Oct 2017           |    Nov 2017 to Dec 2018         |
+
+<b>Table 1: Breakdown of Periods</b>
+
+The dataset of all resale transactions of the estates are categorised into three time periods, as DTL Stage 2 and Stage 3 have different timelines. The dates are based on Land Transport Authority press release which is a good proxy to separate into three unique categories. Parameter period is used to differentiate the three periods.
+Distance to the MRT station is determine using the R package, sp to find st_distances. Co-ordinates are obtained using BatchGeo.
+To ascertain whether the property is near to MRT, the distance to MRT is calculated and less than 1km is near. Near to mrt will have the dummy variable connected = 1, otherwise 0. The distance to nearest MRT in km is also included in the regression model. For Tampines, the nearest MRT station is chosen from the housing block.
+Distance to town centre to Bukit Panjang Interchange and Tampines Interchange respectively.
+Near popular primary school variable accounts for the effect of St. Hilda Primary School in Tampines, as the balloting process for places is competitive and indicated in websites. Near_popular_sch is assigned 1 for within 1km from the school, otherwise 0. There is no popular school in Bukit Panjang.
+For park, HDB property that is located just right beside a park will have assigned 1 otherwise 0. This accounts for the effect of greenery on the resale price.
+For storey, it is created by taking the mid-point of the storey range. For example, 07 to 09 will be 8 and 11 to 15 is 13. The older dataset is in intervals of 5 floors.
+Lease remaining is calculated 
+The parameters used are described as below.
+
+|    Variable               |    Descriptor                                                                                                                                                                                                        |    Cat.    |    Cont.    |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|-------------|
+|    year-month             |    In YYYY-MM format from data.gov                                                                                                                                                                                   |    &#9745;       |             |
+|    year                   |    4-digit year of transaction                                                                                                                                                                                       |            |    &#9745;        |
+|    flat_type              |    3 ROOM, 4 ROOM, 5 ROOM, EXECUTIVE, MULTI-GENERATION                                                                                                                                                               |    &#9745;       |             |
+|    storey_range           |    The floor of the unit in range of 3 floors, “01 TO 03”, “04 TO 06” …   “16 TO 18”                                                                                                                                 |    &#9745;       |             |
+|    storey                 |    Positive integer from storey_range                                                                                                                                                                                |            |    &#9745;        |
+|    floor_area_sqm         |    Floor area                                                                                                                                                                                                        |            |    &#9745;        |
+|    flat_model             |    Name of model of flat   "Model   A","Improved","Apartment","New   Generation","Simplified","Maisonette",   "Adjoined flat","Premium Apartment", "Premium   Maisonette","Multi Generation","DBSS", "Model   A2"    |    &#9745;       |             |
+|    lease_remaining        |    Lease in years left after the sale                                                                                                                                                                                |            |    &#9745;        |
+|    resale_price           |    Transacted Price                                                                                                                                                                                                  |            |    &#9745;        |
+|    distance_mrt           |    Distance in km to the nearest MRT                                                                                                                                                                                 |            |    &#9745;        |
+|    distance_towncentre    |    Distance in km to the town centre (Tampines or Bukit Panjang)                                                                                                                                                     |            |    &#9745;        |
+|    park                   |    Value 1 if next to park, 0 otherwise                                                                                                                                                                              |            |    &#9745;        |
+|    near_pop_sch           |    Value 1 if within 1km of popular primary school, 0 otherwise                                                                                                                                                      |            |    &#9745;        |
+|    period                 |    Value 1 for pre-construction, 2 for construction, 3 for completion                                                                                                                                                |            |    &#9745;        |
+|    connected              |    Value 1 if within 1km to nearest MRT, 0 otherwise                                                                                                                                                                 |            |    &#9745;        |
+Cat. = categorical variable, Cont. = continuous variable for regression
+
+<b>Table 2: Variables from the dataset</b>
+
+```{r include=FALSE}
+data <- read_csv("combined data.csv")
+
+data_bp <- data %>% 
+  filter(town !="TAMPINES")
+
+data_tamp <- data %>%
+  filter(town == "TAMPINES")
+
+count(data_bp)
+count(data_tamp)
+```
+
+
+13642 entries from Tampines and 7867 entries from Bukit Panjang area is considered for this project.
+
+
+##Exploring the Dataset
+
+```{r fig.width=5,fig.height=5,fig.cap="\\label{fig:figs}Distance to MRT - BP Town"}
+hist(data_bp$distance_mrt, main="Distance to MRT - BP", xlab="Distance to MRT", ylab="Frequency", breaks=c(0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6,1.8,2,2.2))
+```
+```{r fig.width=5,fig.height=5,fig.cap="\\label{fig:figs}Distance to MRT - T Town"}
+hist(data_tamp$distance_mrt, main="Distance to MRT - T", xlab="Distance to MRT", ylab="Frequency", breaks=c(0,0.2,0.4,0.6,0.8,1,1.2,1.4,1.6,1.8,2,2.2))
+```
+The distance to MRT is summarised in the two histograms, with mean for BP 1.02km and Tampines 0.64km. With three MRT stations are taken into consideration, HDBs are nearer to MRt and hence a lower mean distance to MRT. Hence, 0.4 to 0.8km range to MRT for Tampines is more common than 1 to 1.2km for BP.
+
+```{r fig.width=5,fig.height=5,fig.cap="\\label{fig:figs}Floor Square Area"}
+boxplot(data_bp$floor_area_sqm,data_tamp$floor_area_sqm, main="Floor Square Area", xlab="Town", ylab="Floor Square Area", names=c("BP", "T"))
+```
+Considering by each period, the mean resale price has increased and then decreased for BP but it has increased throughout in Tampines. BP is a non-matured town with more Built to Order flats coming up to ramp up the supply, then it has seen a lower average price. Also, the resale market also accounts for the other factors such as proximity to Central Business District and attractiveness of the town.
+
+```{r fig.width=5,fig.height=5,fig.cap="\\label{fig:figs}BP by Flat Type"}
+ggplot(data=data_bp, aes(x=flat_type)) +
+    geom_bar(stat="count") + ggtitle("BP by Flat Type") +
+    theme_bw()
+```
+```{r fig.width=5,fig.height=5,fig.cap="\\label{fig:figs}T by Flat Type"}
+ggplot(data=data_tamp, aes(x=flat_type)) +
+    geom_bar(stat="count") + ggtitle("T by Flat Type") +
+    theme_bw()
+```
+By flat type, majority of the flats are 4-room 3530 units for BP and 5331 Tampines. This is typical of a HDB estate with 39% and 45% of the HDB units 4 rooms which is the middle class. There is more 3 room in Tampines which is contributed by a older generation of flats.
+
+```{r include=FALSE}
+period2bp <- data_bp %>% 
+  filter(period == 2)
+
+period1bp <- data_bp %>% 
+  filter(period == 1)
+
+period3bp <- data_bp %>% 
+  filter(period == 3)
+
+mean_resalebp <- c(mean(period1bp$resale_price),mean(period2bp$resale_price),mean(period3bp$resale_price))
+as_tibble(mean_resalebp)
+
+period2tamp <- data_tamp %>% 
+  filter(period == 2)
+
+period1tamp <- data_tamp %>% 
+  filter(period == 1)
+
+period3tamp <- data_tamp %>% 
+  filter(period == 3)
+
+mean_resaletamp <- c(mean(period1tamp$resale_price),mean(period2tamp$resale_price),mean(period3tamp$resale_price))
+as_tibble(mean_resaletamp)
+```
+
+```{r fig.width=5,fig.height=5,fig.cap="\\label{fig:figs}Resale Price in BP"}
+boxplot(period1bp$resale_price,period2bp$resale_price,period2bp$resale_price, main="Resale Price - Bukit Panjang", xlab="Period", ylab="Price", names=c("1", "2","3"))
+```
+```{r fig.width=5,fig.height=5,fig.cap="\\label{fig:figs}Resale Price in T"}
+boxplot(period1tamp$resale_price,period2tamp$resale_price,period2tamp$resale_price, main="Resale Price - Tampines", xlab="Period", ylab="Price", names=c("1", "2","3"))
+```
+
+
+The mean resale price for BP and T are \$409,776 and \$433,119 for all 3 periods. Looking at period-by-period, BP has increase from period 1 to 2 but a fall from period 2 to 3. Tampines has increased with a steeper climb from period 1 to 2.
+Maisonette and other big flats that will fetch prices much higher than the 3rd quartile.
+
+
+

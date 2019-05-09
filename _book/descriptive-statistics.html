@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 4 Descriptive Statistics | A Minimal Book Example</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 4 Descriptive Statistics | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Descriptive Statistics | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Yihui Xie">
+
+
+<meta name="date" content="2019-05-04">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="literature-review.html">
+<link rel="next" href="method-1-regression.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="literature-review.html"><a href="literature-review.html"><i class="fa fa-check"></i><b>3</b> Literature Review</a></li>
+<li class="chapter" data-level="4" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics</a><ul>
+<li class="chapter" data-level="4.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#dataset"><i class="fa fa-check"></i><b>4.1</b> Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#exploring-the-dataset"><i class="fa fa-check"></i><b>4.2</b> Exploring the Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="method-1-regression.html"><a href="method-1-regression.html"><i class="fa fa-check"></i><b>5</b> Method 1 - Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="method-1-regression.html"><a href="method-1-regression.html#linear-regression-model"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="method-1-regression.html"><a href="method-1-regression.html#coefficients"><i class="fa fa-check"></i><b>5.1.1</b> Coefficients</a></li>
+<li class="chapter" data-level="5.1.2" data-path="method-1-regression.html"><a href="method-1-regression.html#residuals"><i class="fa fa-check"></i><b>5.1.2</b> Residuals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="method-2-clustering.html"><a href="method-2-clustering.html"><i class="fa fa-check"></i><b>6</b> Method 2 - Clustering</a></li>
+<li class="chapter" data-level="7" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>7</b> Discussion</a><ul>
+<li class="chapter" data-level="7.1" data-path="discussion.html"><a href="discussion.html#strengths"><i class="fa fa-check"></i><b>7.1</b> Strengths</a></li>
+<li class="chapter" data-level="7.2" data-path="discussion.html"><a href="discussion.html#weaknesses"><i class="fa fa-check"></i><b>7.2</b> Weaknesses</a></li>
+<li class="chapter" data-level="7.3" data-path="discussion.html"><a href="discussion.html#possible-further-studies"><i class="fa fa-check"></i><b>7.3</b> Possible Further Studies</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>8</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="descriptive-statistics" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Descriptive Statistics</h1>
+<div id="dataset" class="section level2">
+<h2><span class="header-section-number">4.1</span> Dataset</h2>
+<p>I have chosen four MRT stations to investigate namely Bukit Panjang, Tampines West, Tampines and Tampines East on the Downtown Line. The dataset is obtained by merging three of the tables found from <a href="mailto:Data@Gov">Data@Gov</a>. The filter was applied to obtain transactions located in districts of Bukit Panjang and Tampines. For Tampines, addresses in Simei are excluded as they are near to Simei MRT on the East West Line. This will reduce the number of transactions to analyse as the study focus on Tampines West (“TW”), Tampines (“T”) and Tampines East (“TE”).</p>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="29%" />
+<col width="26%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage/Period</th>
+<th>Pre-construction (period = 1)</th>
+<th>Construction (period = 2)</th>
+<th>Completion (period = 3)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Stage 2 BP</td>
+<td>Jan 2009 to Jun 2011</td>
+<td>Jul 2011 to Dec 2015</td>
+<td>Jan 2016 to Dec 2018</td>
+</tr>
+<tr class="even">
+<td>Stage 3 TW, T, TE</td>
+<td>Jan 2009 to Oct 2011</td>
+<td>Nov 2011 to Oct 2017</td>
+<td>Nov 2017 to Dec 2018</td>
+</tr>
+</tbody>
+</table>
+<p><b>Table 1: Breakdown of Periods</b></p>
+<p>The dataset of all resale transactions of the estates are categorised into three time periods, as DTL Stage 2 and Stage 3 have different timelines. The dates are based on Land Transport Authority press release which is a good proxy to separate into three unique categories. Parameter period is used to differentiate the three periods. Distance to the MRT station is determine using the R package, sp to find st_distances. Co-ordinates are obtained using BatchGeo. To ascertain whether the property is near to MRT, the distance to MRT is calculated and less than 1km is near. Near to mrt will have the dummy variable connected = 1, otherwise 0. The distance to nearest MRT in km is also included in the regression model. For Tampines, the nearest MRT station is chosen from the housing block. Distance to town centre to Bukit Panjang Interchange and Tampines Interchange respectively. Near popular primary school variable accounts for the effect of St. Hilda Primary School in Tampines, as the balloting process for places is competitive and indicated in websites. Near_popular_sch is assigned 1 for within 1km from the school, otherwise 0. There is no popular school in Bukit Panjang. For park, HDB property that is located just right beside a park will have assigned 1 otherwise 0. This accounts for the effect of greenery on the resale price. For storey, it is created by taking the mid-point of the storey range. For example, 07 to 09 will be 8 and 11 to 15 is 13. The older dataset is in intervals of 5 floors. Lease remaining is calculated The parameters used are described as below.</p>
+<table>
+<colgroup>
+<col width="10%" />
+<col width="79%" />
+<col width="4%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Descriptor</th>
+<th>Cat.</th>
+<th>Cont.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>year-month</td>
+<td>In YYYY-MM format from data.gov</td>
+<td>☑</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>year</td>
+<td>4-digit year of transaction</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="odd">
+<td>flat_type</td>
+<td>3 ROOM, 4 ROOM, 5 ROOM, EXECUTIVE, MULTI-GENERATION</td>
+<td>☑</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>storey_range</td>
+<td>The floor of the unit in range of 3 floors, “01 TO 03”, “04 TO 06” … “16 TO 18”</td>
+<td>☑</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>storey</td>
+<td>Positive integer from storey_range</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="even">
+<td>floor_area_sqm</td>
+<td>Floor area</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="odd">
+<td>flat_model</td>
+<td>Name of model of flat “Model A”,“Improved”,“Apartment”,“New Generation”,“Simplified”,“Maisonette”, “Adjoined flat”,“Premium Apartment”, “Premium Maisonette”,“Multi Generation”,“DBSS”, “Model A2”</td>
+<td>☑</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>lease_remaining</td>
+<td>Lease in years left after the sale</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="odd">
+<td>resale_price</td>
+<td>Transacted Price</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="even">
+<td>distance_mrt</td>
+<td>Distance in km to the nearest MRT</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="odd">
+<td>distance_towncentre</td>
+<td>Distance in km to the town centre (Tampines or Bukit Panjang)</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="even">
+<td>park</td>
+<td>Value 1 if next to park, 0 otherwise</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="odd">
+<td>near_pop_sch</td>
+<td>Value 1 if within 1km of popular primary school, 0 otherwise</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="even">
+<td>period</td>
+<td>Value 1 for pre-construction, 2 for construction, 3 for completion</td>
+<td></td>
+<td>☑</td>
+</tr>
+<tr class="odd">
+<td>connected</td>
+<td>Value 1 if within 1km to nearest MRT, 0 otherwise</td>
+<td></td>
+<td>☑</td>
+</tr>
+</tbody>
+</table>
+<p>Cat. = categorical variable, Cont. = continuous variable for regression</p>
+<p><b>Table 2: Variables from the dataset</b></p>
+<p>13642 entries from Tampines and 7867 entries from Bukit Panjang area is considered for this project.</p>
+</div>
+<div id="exploring-the-dataset" class="section level2">
+<h2><span class="header-section-number">4.2</span> Exploring the Dataset</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(data_bp<span class="op">$</span>distance_mrt, <span class="dt">main=</span><span class="st">&quot;Distance to MRT - BP&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Distance to MRT&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Frequency&quot;</span>, <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.2</span>,<span class="fl">0.4</span>,<span class="fl">0.6</span>,<span class="fl">0.8</span>,<span class="dv">1</span>,<span class="fl">1.2</span>,<span class="fl">1.4</span>,<span class="fl">1.6</span>,<span class="fl">1.8</span>,<span class="dv">2</span>,<span class="fl">2.2</span>))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-5-1.png" alt="\label{fig:figs}Distance to MRT - BP Town" width="480" />
+<p class="caption">
+Figure 4.1: Distance to MRT - BP Town
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(data_tamp<span class="op">$</span>distance_mrt, <span class="dt">main=</span><span class="st">&quot;Distance to MRT - T&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Distance to MRT&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Frequency&quot;</span>, <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.2</span>,<span class="fl">0.4</span>,<span class="fl">0.6</span>,<span class="fl">0.8</span>,<span class="dv">1</span>,<span class="fl">1.2</span>,<span class="fl">1.4</span>,<span class="fl">1.6</span>,<span class="fl">1.8</span>,<span class="dv">2</span>,<span class="fl">2.2</span>))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-6-1.png" alt="\label{fig:figs}Distance to MRT - T Town" width="480" />
+<p class="caption">
+Figure 4.2: Distance to MRT - T Town
+</p>
+</div>
+<p>The distance to MRT is summarised in the two histograms, with mean for BP 1.02km and Tampines 0.64km. With three MRT stations are taken into consideration, HDBs are nearer to MRt and hence a lower mean distance to MRT. Hence, 0.4 to 0.8km range to MRT for Tampines is more common than 1 to 1.2km for BP.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(data_bp<span class="op">$</span>floor_area_sqm,data_tamp<span class="op">$</span>floor_area_sqm, <span class="dt">main=</span><span class="st">&quot;Floor Square Area&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Town&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Floor Square Area&quot;</span>, <span class="dt">names=</span><span class="kw">c</span>(<span class="st">&quot;BP&quot;</span>, <span class="st">&quot;T&quot;</span>))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-7-1.png" alt="\label{fig:figs}Floor Square Area" width="480" />
+<p class="caption">
+Figure 4.3: Floor Square Area
+</p>
+</div>
+<p>Considering by each period, the mean resale price has increased and then decreased for BP but it has increased throughout in Tampines. BP is a non-matured town with more Built to Order flats coming up to ramp up the supply, then it has seen a lower average price. Also, the resale market also accounts for the other factors such as proximity to Central Business District and attractiveness of the town.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>data_bp, <span class="kw">aes</span>(<span class="dt">x=</span>flat_type)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;count&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;BP by Flat Type&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-8-1.png" alt="\label{fig:figs}BP by Flat Type" width="480" />
+<p class="caption">
+Figure 4.4: BP by Flat Type
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>data_tamp, <span class="kw">aes</span>(<span class="dt">x=</span>flat_type)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;count&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;T by Flat Type&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-9-1.png" alt="\label{fig:figs}T by Flat Type" width="480" />
+<p class="caption">
+Figure 4.5: T by Flat Type
+</p>
+</div>
+<p>By flat type, majority of the flats are 4-room 3530 units for BP and 5331 Tampines. This is typical of a HDB estate with 39% and 45% of the HDB units 4 rooms which is the middle class. There is more 3 room in Tampines which is contributed by a older generation of flats.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(period1bp<span class="op">$</span>resale_price,period2bp<span class="op">$</span>resale_price,period2bp<span class="op">$</span>resale_price, <span class="dt">main=</span><span class="st">&quot;Resale Price - Bukit Panjang&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Period&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Price&quot;</span>, <span class="dt">names=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-11"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-11-1.png" alt="\label{fig:figs}Resale Price in BP" width="480" />
+<p class="caption">
+Figure 4.6: Resale Price in BP
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(period1tamp<span class="op">$</span>resale_price,period2tamp<span class="op">$</span>resale_price,period2tamp<span class="op">$</span>resale_price, <span class="dt">main=</span><span class="st">&quot;Resale Price - Tampines&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Period&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;Price&quot;</span>, <span class="dt">names=</span><span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-12"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" alt="\label{fig:figs}Resale Price in T" width="480" />
+<p class="caption">
+Figure 4.7: Resale Price in T
+</p>
+</div>
+<p>The mean resale price for BP and T are $409,776 and $433,119 for all 3 periods. Looking at period-by-period, BP has increase from period 1 to 2 but a fall from period 2 to 3. Tampines has increased with a steeper climb from period 1 to 2. Maisonette and other big flats that will fetch prices much higher than the 3rd quartile.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="literature-review.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="method-1-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-descriptive_stats.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

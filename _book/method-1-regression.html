@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 5 Method 1 - Regression | A Minimal Book Example</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 5 Method 1 - Regression | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Method 1 - Regression | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Yihui Xie">
+
+
+<meta name="date" content="2019-05-04">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="descriptive-statistics.html">
+<link rel="next" href="method-2-clustering.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="literature-review.html"><a href="literature-review.html"><i class="fa fa-check"></i><b>3</b> Literature Review</a></li>
+<li class="chapter" data-level="4" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics</a><ul>
+<li class="chapter" data-level="4.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#dataset"><i class="fa fa-check"></i><b>4.1</b> Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#exploring-the-dataset"><i class="fa fa-check"></i><b>4.2</b> Exploring the Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="method-1-regression.html"><a href="method-1-regression.html"><i class="fa fa-check"></i><b>5</b> Method 1 - Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="method-1-regression.html"><a href="method-1-regression.html#linear-regression-model"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="method-1-regression.html"><a href="method-1-regression.html#coefficients"><i class="fa fa-check"></i><b>5.1.1</b> Coefficients</a></li>
+<li class="chapter" data-level="5.1.2" data-path="method-1-regression.html"><a href="method-1-regression.html#residuals"><i class="fa fa-check"></i><b>5.1.2</b> Residuals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="method-2-clustering.html"><a href="method-2-clustering.html"><i class="fa fa-check"></i><b>6</b> Method 2 - Clustering</a></li>
+<li class="chapter" data-level="7" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>7</b> Discussion</a><ul>
+<li class="chapter" data-level="7.1" data-path="discussion.html"><a href="discussion.html#strengths"><i class="fa fa-check"></i><b>7.1</b> Strengths</a></li>
+<li class="chapter" data-level="7.2" data-path="discussion.html"><a href="discussion.html#weaknesses"><i class="fa fa-check"></i><b>7.2</b> Weaknesses</a></li>
+<li class="chapter" data-level="7.3" data-path="discussion.html"><a href="discussion.html#possible-further-studies"><i class="fa fa-check"></i><b>7.3</b> Possible Further Studies</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>8</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="method-1---regression" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Method 1 - Regression</h1>
+<p>Ordinary least squares linear regression is done firstly (Base Model) to establish the relationship between the variables. Log-linear regression is performed to determine the percentage change in resale price with respect to the change in the independent variables (Change Model).</p>
+<p>The assumptions to have a good model fit are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Variables are independently distributed</p></li>
+<li><p>No multi-collinearity</p></li>
+<li><p>Large outliers are rare</p></li>
+</ol>
+<div id="linear-regression-model" class="section level2">
+<h2><span class="header-section-number">5.1</span> Linear Regression Model</h2>
+<div id="coefficients" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Coefficients</h3>
+<table style="width:100%;">
+<colgroup>
+<col width="20%" />
+<col width="27%" />
+<col width="27%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>Dependent variable:</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>resale_price</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>BP period 1</td>
+<td>BP period 2</td>
+<td>BP period 3</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>floor_area_sqm</td>
+<td>2,689.456***</td>
+<td>3,575.292***</td>
+<td>4,297.322***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(47.462)</td>
+<td>(36.961)</td>
+<td>(86.110)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>connected</td>
+<td>22,194.180***</td>
+<td>41,669.390***</td>
+<td>61,123.180***</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(1,808.657)</td>
+<td>(1,431.850)</td>
+<td>(3,403.679)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>lease_remaining</td>
+<td>3,321.929***</td>
+<td>3,777.677***</td>
+<td>3,645.197***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(154.635)</td>
+<td>(112.449)</td>
+<td>(244.210)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>storey</td>
+<td>3,033.051***</td>
+<td>3,851.335***</td>
+<td>4,226.184***</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(153.964)</td>
+<td>(125.236)</td>
+<td>(284.796)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Constant</td>
+<td>-241,824.200***</td>
+<td>-297,502.400***</td>
+<td>-381,081.600***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(13,006.660)</td>
+<td>(9,177.533)</td>
+<td>(21,795.130)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Observations</td>
+<td>2,784</td>
+<td>4,240</td>
+<td>873</td>
+</tr>
+<tr class="even">
+<td>R2</td>
+<td>0.663</td>
+<td>0.782</td>
+<td>0.805</td>
+</tr>
+<tr class="odd">
+<td>Adjusted R2</td>
+<td>0.663</td>
+<td>0.782</td>
+<td>0.804</td>
+</tr>
+<tr class="even">
+<td>Residual Std. Error</td>
+<td>46,918.500 (df = 2779)</td>
+<td>45,808.740 (df = 4235)</td>
+<td>49,183.120 (df = 868)</td>
+</tr>
+<tr class="odd">
+<td>F Statistic</td>
+<td>1,367.588*** (df = 4; 2779)</td>
+<td>3,805.884*** (df = 4; 4235)</td>
+<td>895.464*** (df = 4; 868)</td>
+</tr>
+</tbody>
+</table>
+<p>Note: *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</p>
+<p>The coefficients for connected is positive that is correctly predicted as houses nearer to MRT command a higher price. All coefficients are p-value&lt;0.01 that shows a good way to estimate the effect. The constant has dropped significantly which may be prone to omitted variable bias. R-squared is not good for period 1 while period 2 and period 3 is high. Taking an example of a flat with floor area 100 square metres, storey 7, with lease remaining at 80,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Period 1</th>
+<th>Period 2</th>
+<th>Period 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Connected</td>
+<td>336,301</td>
+<td>430,869</td>
+<td>430,972</td>
+</tr>
+<tr class="even">
+<td>Not connected</td>
+<td>314,107</td>
+<td>389,200</td>
+<td>369,849</td>
+</tr>
+</tbody>
+</table>
+<p>This illustrates that there is additional benefit of staying near Bukit Panjang MRT. The stabilisation of period 2 and period 3 can be attributed to increase in number of Build to Order flats. As the transactions are not homogenous and certain flat type or flat size may be transacted so the data may be skewed.</p>
+<table style="width:100%;">
+<colgroup>
+<col width="19%" />
+<col width="26%" />
+<col width="26%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>Dependent Variable</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>resale_price</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>T period 1</td>
+<td>T period 2</td>
+<td>T period 3</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>floor_area_sqm</td>
+<td>3,036.943***</td>
+<td>3,729.498***</td>
+<td>4,294.834***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(28.858)</td>
+<td>(25.294)</td>
+<td>(58.870)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>connected</td>
+<td>2,016.711</td>
+<td>19,151.510***</td>
+<td>27,530.090***</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(2,063.843)</td>
+<td>(1,817.018)</td>
+<td>(4,927.825)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>lease_remaining</td>
+<td>-1,009.607***</td>
+<td>2,034.100***</td>
+<td>1,131.236***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(141.440)</td>
+<td>(103.722)</td>
+<td>(240.352)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>storey</td>
+<td>2,828.676***</td>
+<td>3,997.770***</td>
+<td>4,829.908***</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(187.757)</td>
+<td>(163.370)</td>
+<td>(442.000)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Constant</td>
+<td>125,626.900***</td>
+<td>-115,154.200***</td>
+<td>-123,982.500***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(10,348.700)</td>
+<td>(7,293.582)</td>
+<td>(18,006.770)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Observations</td>
+<td>5,161</td>
+<td>7,067</td>
+<td>1,414</td>
+</tr>
+<tr class="even">
+<td>R2</td>
+<td>0.723</td>
+<td>0.807</td>
+<td>0.803</td>
+</tr>
+<tr class="odd">
+<td>Adjusted R2</td>
+<td>0.723</td>
+<td>0.807</td>
+<td>0.802</td>
+</tr>
+<tr class="even">
+<td>Residual Std. Error</td>
+<td>45,863.240 (df = 5156)</td>
+<td>47,581.530 (df = 7062)</td>
+<td>57,127.880 (df = 1409)</td>
+</tr>
+<tr class="odd">
+<td>F Statistic</td>
+<td>3,367.789*** (df = 4; 5156)</td>
+<td>7,395.560*** (df = 4; 7062)</td>
+<td>1,433.155*** (df = 4; 1409)</td>
+</tr>
+</tbody>
+</table>
+<p>Note: *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</p>
+<p>The coefficients for connected is positive that is the same for BP. R-square is high which shows that the model is a good fit to predict housing prices. The constant has decreased from period 1 to period 2 could be countered due to lease_remaining parameter increased. Taking the same attributes for illustration,</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Period 1</th>
+<th>Period 2</th>
+<th>Period 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Connected</td>
+<td>370,370</td>
+<td>467,659</td>
+<td>457,339</td>
+</tr>
+<tr class="even">
+<td>Not connected</td>
+<td>368,353</td>
+<td>448,508</td>
+<td>429,809</td>
+</tr>
+</tbody>
+</table>
+<p>The same trend for a fall from period 2 and period 3 is seen. The premium of locating near MRT after construction seemed to stabilise after a big jump after announcement. Notably, period 1 connected and not connected are very close, as the coefficient is $2016. This is useful to see the increment of price by isolating the connected variable.</p>
+</div>
+<div id="residuals" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Residuals</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bp_ols_p1_re &lt;-<span class="st"> </span><span class="kw">augment</span>(bp_ols_p1, <span class="dt">data =</span> data_bp_p1)
+bp_ols_p1_re <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> .resid)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">50</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Residuals Base Model BP Period 1&quot;</span>)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bp_ols_p2_re &lt;-<span class="st"> </span><span class="kw">augment</span>(bp_ols_p2, <span class="dt">data =</span> data_bp_p2)
+bp_ols_p2_re <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> .resid)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">50</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Residuals Base Model BP Period 2&quot;</span>)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bp_ols_p3_re &lt;-<span class="st"> </span><span class="kw">augment</span>(bp_ols_p3, <span class="dt">data =</span> data_bp_p3)
+bp_ols_p3_re <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> .resid)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">50</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Residuals Base Model BP Period 3&quot;</span>)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-20-1.png" width="672" /> <img src="bookdown-demo_files/figure-html/unnamed-chunk-21-1.png" width="672" /> <img src="bookdown-demo_files/figure-html/unnamed-chunk-22-1.png" width="672" /> <img src="bookdown-demo_files/figure-html/unnamed-chunk-23-1.png" width="672" /> The residuals for BP base models are close to a normal distribution. For period 3, the is a smaller dataset available since opening of the BP MRT, which make outliers stands out as it does not spread out as much.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bp_data_cont_p &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(resale_price) <span class="op">~</span><span class="st"> </span>floor_area_sqm <span class="op">+</span><span class="st"> </span>period <span class="op">+</span><span class="st"> </span>connected <span class="op">+</span><span class="st"> </span>near_pop_sch <span class="op">+</span><span class="st"> </span>distance_towncentre <span class="op">+</span><span class="st"> </span>park <span class="op">+</span><span class="st"> </span>flat_type <span class="op">+</span><span class="st"> </span>storey <span class="op">+</span><span class="st"> </span>lease_remaining, data_bp)
+
+tamp_data_cont_p &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(resale_price) <span class="op">~</span><span class="st"> </span>floor_area_sqm <span class="op">+</span><span class="st"> </span>period <span class="op">+</span><span class="st"> </span>connected <span class="op">+</span><span class="st"> </span>near_pop_sch <span class="op">+</span><span class="st"> </span>distance_towncentre <span class="op">+</span><span class="st"> </span>park <span class="op">+</span><span class="st"> </span>flat_type <span class="op">+</span><span class="st"> </span>storey <span class="op">+</span><span class="st"> </span>lease_remaining, data_tamp)
+
+bp_data_cat_p &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(resale_price) <span class="op">~</span><span class="st"> </span>floor_area_sqm <span class="op">+</span><span class="st"> </span>per <span class="op">+</span><span class="st"> </span>connected <span class="op">+</span><span class="st"> </span>near_pop_sch <span class="op">+</span><span class="st"> </span>distance_towncentre <span class="op">+</span><span class="st"> </span>park <span class="op">+</span><span class="st"> </span>flat_type <span class="op">+</span><span class="st"> </span>storey <span class="op">+</span><span class="st"> </span>lease_remaining, data_bp)
+
+tamp_data_cat_p &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(resale_price) <span class="op">~</span><span class="st"> </span>floor_area_sqm <span class="op">+</span><span class="st"> </span>per <span class="op">+</span><span class="st"> </span>connected <span class="op">+</span><span class="st"> </span>near_pop_sch <span class="op">+</span><span class="st"> </span>distance_towncentre <span class="op">+</span><span class="st"> </span>park <span class="op">+</span><span class="st"> </span>flat_type <span class="op">+</span><span class="st"> </span>storey <span class="op">+</span><span class="st"> </span>lease_remaining, data_tamp)</code></pre></div>
+<table style="width:100%;">
+<colgroup>
+<col width="17%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th></th>
+<th>Dependent variable:</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>log(resale_price)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(1) – BP Cont</td>
+<td>(2) - BP Cat</td>
+<td>(3) – T Cont</td>
+<td>(4) – T Cat</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>floor_area_sqm</td>
+<td>0.004***</td>
+<td>0.005***</td>
+<td>0.005***</td>
+<td>0.006***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.0002)</td>
+<td>(0.0002)</td>
+<td>(0.0002)</td>
+<td>(0.0001)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>period</td>
+<td>0.146***</td>
+<td></td>
+<td>0.143***</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(0.002)</td>
+<td></td>
+<td>(0.002)</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>perthree</td>
+<td></td>
+<td>0.216***</td>
+<td></td>
+<td>0.211***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>(0.004)</td>
+<td></td>
+<td>(0.003)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>pertwo</td>
+<td></td>
+<td>0.235***</td>
+<td></td>
+<td>0.213***</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>(0.002)</td>
+<td></td>
+<td>(0.002)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>connected</td>
+<td>-0.037***</td>
+<td>-0.042***</td>
+<td>0.010***</td>
+<td>0.010***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.005)</td>
+<td>(0.004)</td>
+<td>(0.003)</td>
+<td>(0.003)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>near_pop_sch</td>
+<td></td>
+<td></td>
+<td>0.005**</td>
+<td>0.004**</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td>(0.002)</td>
+<td>(0.002)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>distance_towncentre</td>
+<td>-0.187***</td>
+<td>-0.193***</td>
+<td>-0.099***</td>
+<td>-0.098***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.006)</td>
+<td>(0.005)</td>
+<td>(0.002)</td>
+<td>(0.002)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>park</td>
+<td>-0.004</td>
+<td>-0.009</td>
+<td>0.001</td>
+<td>0.005</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(0.006)</td>
+<td>(0.006)</td>
+<td>(0.004)</td>
+<td>(0.004)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>flat_type3 ROOM</td>
+<td>0.485***</td>
+<td>0.375***</td>
+<td>0.286***</td>
+<td>0.206***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.040)</td>
+<td>(0.034)</td>
+<td>(0.026)</td>
+<td>(0.023)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>flat_type4 ROOM</td>
+<td>0.545***</td>
+<td>0.427***</td>
+<td>0.363***</td>
+<td>0.279***</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(0.041)</td>
+<td>(0.035)</td>
+<td>(0.026)</td>
+<td>(0.023)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>flat_type5 ROOM</td>
+<td>0.633***</td>
+<td>0.515***</td>
+<td>0.408***</td>
+<td>0.320***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.042)</td>
+<td>(0.036)</td>
+<td>(0.028)</td>
+<td>(0.024)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>flat_typeEXECUTIVE</td>
+<td>0.767***</td>
+<td>0.643***</td>
+<td>0.512***</td>
+<td>0.427***</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(0.044)</td>
+<td>(0.038)</td>
+<td>(0.029)</td>
+<td>(0.026)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>flat_typeMULTI-GENERATION</td>
+<td></td>
+<td></td>
+<td>0.649***</td>
+<td>0.586***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td>(0.039)</td>
+<td>(0.034)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>storey</td>
+<td>0.007***</td>
+<td>0.007***</td>
+<td>0.007***</td>
+<td>0.007***</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(0.0002)</td>
+<td>(0.0002)</td>
+<td>(0.0003)</td>
+<td>(0.0002)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>lease_remaining</td>
+<td>0.008***</td>
+<td>0.009***</td>
+<td>0.005***</td>
+<td>0.005***</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(0.0003)</td>
+<td>(0.0002)</td>
+<td>(0.0002)</td>
+<td>(0.0002)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Constant</td>
+<td>11.058***</td>
+<td>11.206***</td>
+<td>11.452***</td>
+<td>11.623***</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>(0.053)</td>
+<td>(0.044)</td>
+<td>(0.033)</td>
+<td>(0.029)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Observations</td>
+<td>7,897</td>
+<td>7,897</td>
+<td>13,642</td>
+<td>13,642</td>
+</tr>
+<tr class="odd">
+<td>R2</td>
+<td>0.788</td>
+<td>0.845</td>
+<td>0.831</td>
+<td>0.868</td>
+</tr>
+<tr class="even">
+<td>Adjusted R2</td>
+<td>0.788</td>
+<td>0.845</td>
+<td>0.831</td>
+<td>0.868</td>
+</tr>
+<tr class="odd">
+<td>Residual Std. Error</td>
+<td>0.111 (df = 7885)</td>
+<td>0.095 (df = 7884)</td>
+<td>0.102 (df = 13628)</td>
+<td>0.090 (df = 13627)</td>
+</tr>
+<tr class="even">
+<td>F Statistic</td>
+<td>2,666.485*** (df = 11; 7885)</td>
+<td>3,574.714*** (df = 12; 7884)</td>
+<td>5,165.174*** (df = 13; 13628)</td>
+<td>6,414.803*** (df = 14; 13627)</td>
+</tr>
+</tbody>
+</table>
+<p>Note: *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</p>
+<p>The log-linear regression provides us the coefficients with the percentage change of the variable with respect to resale price. Hence, connected to MRT station for Bukit Panjang</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="descriptive-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="method-2-clustering.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-method1.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

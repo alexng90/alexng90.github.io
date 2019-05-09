@@ -1,0 +1,3 @@
+# Literature Review
+
+Studies done to find the effect on price with a new MRT on the Downtown Line from NUS Economics thesis. He looked at all stations on Downtown Line 2 and examine the resale price effect using regression. The key result is an average initial increase in nearby resale prices by 1.9 per cent, construction period by 3 per cent, and 7 per cent for those within 1km. A difference-in-difference approach is used to analyse the data [@Chia].

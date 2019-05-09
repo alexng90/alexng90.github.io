@@ -1,0 +1,8 @@
+# Introduction {#intro}
+
+Housing and Development Board (HDB) resale flats is an important asset for Singapore. Factors such as the location, size, community facilities and presence of good amenities has influenced the price of HDB prices over time. A good sample of how HDB prices has changed over time can be obtained from DataGov resale price data, which are determine by demand and supply and the professional real estate valuer. HDB units is a high-value asset with a large proportion of income invested in a roof over our head. With more than 80% of Singapore population living in HDB flats, it is an essential jigsaw piece of good social stability. 
+
+With high cost of owning a car in Singapore, the effect on staying near an MRT station will save time and money accumulated in travelling for school, work and play. A premium on a flat near is MRT is expected, and if the MRT is an interchange station the effect is stronger with two options of travelling and making accessibility to other areas less bearable.
+
+On this backdrop, the motivation of this report is to find out whether Downtown Line MRT station near HDB flats will have a price premium or other behaviours. This is done through regression and clustering techniques that are learnt for Computational Urban Analysis class.
+

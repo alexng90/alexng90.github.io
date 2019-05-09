@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 6 Method 2 - Clustering | A Minimal Book Example</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 6 Method 2 - Clustering | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Method 2 - Clustering | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Yihui Xie">
+
+
+<meta name="date" content="2019-05-04">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="method-1-regression.html">
+<link rel="next" href="discussion.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="literature-review.html"><a href="literature-review.html"><i class="fa fa-check"></i><b>3</b> Literature Review</a></li>
+<li class="chapter" data-level="4" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>4</b> Descriptive Statistics</a><ul>
+<li class="chapter" data-level="4.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#dataset"><i class="fa fa-check"></i><b>4.1</b> Dataset</a></li>
+<li class="chapter" data-level="4.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#exploring-the-dataset"><i class="fa fa-check"></i><b>4.2</b> Exploring the Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="method-1-regression.html"><a href="method-1-regression.html"><i class="fa fa-check"></i><b>5</b> Method 1 - Regression</a><ul>
+<li class="chapter" data-level="5.1" data-path="method-1-regression.html"><a href="method-1-regression.html#linear-regression-model"><i class="fa fa-check"></i><b>5.1</b> Linear Regression Model</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="method-1-regression.html"><a href="method-1-regression.html#coefficients"><i class="fa fa-check"></i><b>5.1.1</b> Coefficients</a></li>
+<li class="chapter" data-level="5.1.2" data-path="method-1-regression.html"><a href="method-1-regression.html#residuals"><i class="fa fa-check"></i><b>5.1.2</b> Residuals</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="method-2-clustering.html"><a href="method-2-clustering.html"><i class="fa fa-check"></i><b>6</b> Method 2 - Clustering</a></li>
+<li class="chapter" data-level="7" data-path="discussion.html"><a href="discussion.html"><i class="fa fa-check"></i><b>7</b> Discussion</a><ul>
+<li class="chapter" data-level="7.1" data-path="discussion.html"><a href="discussion.html#strengths"><i class="fa fa-check"></i><b>7.1</b> Strengths</a></li>
+<li class="chapter" data-level="7.2" data-path="discussion.html"><a href="discussion.html#weaknesses"><i class="fa fa-check"></i><b>7.2</b> Weaknesses</a></li>
+<li class="chapter" data-level="7.3" data-path="discussion.html"><a href="discussion.html#possible-further-studies"><i class="fa fa-check"></i><b>7.3</b> Possible Further Studies</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>8</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="method-2---clustering" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Method 2 - Clustering</h1>
+<p>For Tampines Town, clustering is performed using factor analysis and k means. The street names are shortened for easier interpretation on the graphs. I summarised the continuous variables for by the taking the mean of 1. Resale price 2. Lease remaining 3. Distance to mrt 4. Floor square area</p>
+<p>The clusters are done separately for each period for comparison. The factor loadings of each period as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tamp_block &lt;-<span class="st"> </span>data_tamp <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(short_street_name,period) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_price =</span> <span class="kw">mean</span>(resale_price)<span class="op">/</span><span class="dv">1000</span>, <span class="dt">mean_distance_mrt =</span> <span class="kw">mean</span>(distance_mrt),<span class="dt">mean_lease_remaining =</span> <span class="kw">mean</span>(lease_remaining),<span class="dt">mean_floor_square =</span> <span class="kw">mean</span>(floor_area_sqm))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tamp_block_p1 &lt;-<span class="st"> </span>tamp_block <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(period <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)
+
+tamp_block_p2 &lt;-<span class="st"> </span>tamp_block <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(period <span class="op">==</span><span class="st"> </span><span class="dv">2</span>)
+
+tamp_block_p3 &lt;-<span class="st"> </span>tamp_block <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(period <span class="op">==</span><span class="st"> </span><span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa_s &lt;-<span class="st"> </span>tamp_block_p1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="dt">var =</span> <span class="st">&quot;short_street_name&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>period) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">principal</span>(<span class="dt">nfactors =</span> <span class="dv">4</span>, <span class="dt">rotate =</span> <span class="st">&quot;varimax&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa1l&lt;-fa_s[[<span class="st">&#39;loadings&#39;</span>]] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unclass</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;short_street_name&quot;</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># convert loadings to a tibble or easy plotting </span>
+<span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> <span class="st">&quot;component&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>, <span class="op">-</span>short_street_name) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> short_street_name, <span class="dt">y =</span> value)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span>component)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-39"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-39-1.png" alt="\label{fig:figs}Factor Loadings Dot Plot Period 1" width="672" />
+<p class="caption">
+Figure 6.1: Factor Loadings Dot Plot Period 1
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-40"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-40-1.png" alt="\label{fig:figs}Factor Loadings Dot Plot Period 2" width="672" />
+<p class="caption">
+Figure 6.2: Factor Loadings Dot Plot Period 2
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-41"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-41-1.png" alt="\label{fig:figs}Factor Loadings Dot Plot Period 3" width="672" />
+<p class="caption">
+Figure 6.3: Factor Loadings Dot Plot Period 3
+</p>
+</div>
+<p>By observing all three plots, RC2 and RC3 looks similar which is a good way to compare across period. Hence, three plots are made to show how the streets are clustered using RC2 and RC3. This is then followed by a k means clustering plots for all four factors. This will provide two ways of looking at the data, RC2 and RC3 as well as RC1 and RC2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa &lt;-<span class="st"> </span>tamp_block_p1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="dt">var =</span> <span class="st">&quot;short_street_name&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>period) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">principal</span>(<span class="dt">nfactors =</span> <span class="dv">4</span>, <span class="dt">rotate =</span> <span class="st">&quot;varimax&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&#39;scores&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unclass</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;short_street_name&quot;</span>)
+  
+
+fa <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> RC2, <span class="dt">y =</span> RC3)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> short_street_name))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-42"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-42-1.png" alt="\label{fig:figs}Factor Analysis Period 1" width="672" />
+<p class="caption">
+Figure 6.4: Factor Analysis Period 1
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1234</span>)
+
+cluster_data &lt;-<span class="st"> </span>fa <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># remove planning_area column so we are left with only &#39;data&#39; columns</span>
+<span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="dt">var =</span> <span class="st">&quot;short_street_name&quot;</span>)
+
+kmeans_clusters &lt;-<span class="st"> </span><span class="kw">kmeans</span>(cluster_data, <span class="dt">centers =</span> <span class="dv">4</span>, <span class="dt">nstart =</span> <span class="dv">50</span>)
+
+kmeans_clusters</code></pre></div>
+<pre><code>## K-means clustering with 4 clusters of sizes 12, 3, 8, 4
+## 
+## Cluster means:
+##          RC1        RC3        RC2        RC4
+## 1 -0.4020473 -0.4447678 -0.6274196 -0.4702097
+## 2  0.4625298  1.2834533  1.1413307 -1.5865209
+## 3  0.7544959  0.6008555 -0.2033782  0.9231409
+## 4 -0.6497472 -0.8299978  1.4330172  0.7542379
+## 
+## Clustering vector:
+##   AVE 4   AVE 5   AVE 7   AVE 8   AVE 9  CTRL 1   ST 11   ST 12   ST 21 
+##       1       3       3       2       3       1       4       1       1 
+##   ST 22   ST 23   ST 24   ST 32   ST 33   ST 34   ST 41   ST 42   ST 43 
+##       4       1       1       3       3       3       1       1       3 
+##   ST 44   ST 45   ST 71   ST 72   ST 81   ST 82   ST 83   ST 84   ST 91 
+##       1       3       2       2       1       1       4       4       1 
+## 
+## Within cluster sum of squares by cluster:
+## [1] 18.151954  1.960164 23.805472  1.824574
+##  (between_SS / total_SS =  56.0 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
+## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
+## [9] &quot;ifault&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_cluster</span>(kmeans_clusters, <span class="dt">data =</span> cluster_data, <span class="dt">main =</span> <span class="st">&quot;Tampines Period 1&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-44"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-44-1.png" alt="\label{fig:figs}K Means Plot Period 1" width="672" />
+<p class="caption">
+Figure 6.5: K Means Plot Period 1
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_nbclust</span>(cluster_data, kmeans, <span class="dt">method =</span> <span class="st">&quot;wss&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-45"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" alt="\label{fig:figs}Optimal Number of Clusters" width="672" />
+<p class="caption">
+Figure 6.6: Optimal Number of Clusters
+</p>
+</div>
+<p>A note on determining the number of clusters by identifying the shoulder from the chart and 4 is a decent number to work with.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa2 &lt;-<span class="st"> </span>tamp_block_p2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="dt">var =</span> <span class="st">&quot;short_street_name&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>period) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">principal</span>(<span class="dt">nfactors =</span> <span class="dv">4</span>, <span class="dt">rotate =</span> <span class="st">&quot;varimax&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&#39;scores&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unclass</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;short_street_name&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> RC2, <span class="dt">y =</span> RC3)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> short_street_name))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-47"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-47-1.png" alt="\label{fig:figs}Factor Analysis Period 2" width="672" />
+<p class="caption">
+Figure 6.7: Factor Analysis Period 2
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_cluster</span>(kmeans_clusters2, <span class="dt">data =</span> cluster_data2, <span class="dt">main =</span> <span class="st">&quot;Tampines Period 2&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-49"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-49-1.png" alt="\label{fig:figs}K Means Period 2" width="672" />
+<p class="caption">
+Figure 6.8: K Means Period 2
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa3 &lt;-<span class="st"> </span>tamp_block_p3 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">column_to_rownames</span>(<span class="dt">var =</span> <span class="st">&quot;short_street_name&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>period) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">principal</span>(<span class="dt">nfactors =</span> <span class="dv">4</span>, <span class="dt">rotate =</span> <span class="st">&quot;varimax&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pluck</span>(<span class="st">&#39;scores&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unclass</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">rownames =</span> <span class="st">&quot;short_street_name&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fa3 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> RC2, <span class="dt">y =</span> RC3)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> short_street_name))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-51"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-51-1.png" alt="\label{fig:figs}Factor Analysis Period 3" width="672" />
+<p class="caption">
+Figure 6.9: Factor Analysis Period 3
+</p>
+</div>
+<pre><code>## K-means clustering with 4 clusters of sizes 8, 1, 13, 6
+## 
+## Cluster means:
+##          RC4        RC3         RC2         RC1
+## 1  0.7405699  0.9106619 -0.07880494 -0.65241104
+## 2 -1.6859694  2.5136703 -0.34803984  3.46312336
+## 3 -0.2034392 -0.6445917 -0.59886215  0.18052291
+## 4 -0.2656466 -0.2365454  1.46061455 -0.09843881
+## 
+## Clustering vector:
+##   AVE 4   AVE 5   AVE 7   AVE 8   AVE 9  CTRL 1  CTRL 7   ST 11   ST 12 
+##       3       3       1       4       1       3       2       4       3 
+##   ST 21   ST 22   ST 23   ST 24   ST 32   ST 33   ST 34   ST 41   ST 42 
+##       3       4       3       3       1       1       1       3       3 
+##   ST 43   ST 44   ST 45   ST 71   ST 72   ST 81   ST 82   ST 83   ST 84 
+##       1       3       1       1       4       3       3       4       4 
+##   ST 91 
+##       3 
+## 
+## Within cluster sum of squares by cluster:
+## [1] 17.687999  0.000000 22.978607  6.938138
+##  (between_SS / total_SS =  55.9 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
+## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
+## [9] &quot;ifault&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_cluster</span>(kmeans_clusters3, <span class="dt">data =</span> cluster_data3, <span class="dt">main =</span> <span class="st">&quot;Tampines Period 3&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-53"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-53-1.png" alt="\label{fig:figs}K Means Period 3" width="672" />
+<p class="caption">
+Figure 6.10: K Means Period 3
+</p>
+</div>
+<p>For RC2 and RC3, a street that has a major change in relative positions is Ave 9. Ave 9 was similar to St 32 in period 1 and 2 and then moved to near to Ctrl 7. St 83 and St 22 moved closer. There is a change in scales with Ctrl 7 from Period 2. Based on RC2 and RC3, the positions are clustered and remain similar despite the completion of the new MRT stations. This shows some stability and that distance to MRT and lease remaining has little impact. This is supported by the small coefficients in the log-linear regression model.</p>
+<p>In k means clustering, the outlier Ctrl 7 has skewed the data and thus period 2 and period 3 cluster plot has shifted mostly to a corner of the graph away from the other points. Ctrl 7 has Design Build and Sell Scheme (DBSS) flats which is in-between a executive condominium and regular HDB flats, translating to higher resale price. The average lease remaining for DBSS is high at 90 years and floor area is 108 square metres, which also deviate from Tampines average.</p>
+<p>By observing the movements across the clusters as adjusted with the best fit of cluster numbers since the clusters are arbituary across time periods, there are 16 streets that cluster remains unchanged, while the rest of the 12 changed. To compare 3 clusters easily across 3 periods, k means with 3 clusters is performed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kmeans_clusters1 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(cluster_data, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">50</span>)
+
+kmeans_clusters1</code></pre></div>
+<pre><code>## K-means clustering with 3 clusters of sizes 9, 7, 11
+## 
+## Cluster means:
+##          RC1        RC3        RC2        RC4
+## 1 -0.2192364  0.1524827  0.7200150  0.9307781
+## 2  1.1166228  0.1141529  0.4380098 -0.8788598
+## 3 -0.5312029 -0.1974013 -0.8678367 -0.2022713
+## 
+## Clustering vector:
+##   AVE 4   AVE 5   AVE 7   AVE 8   AVE 9  CTRL 1   ST 11   ST 12   ST 21 
+##       3       2       3       2       1       3       1       2       3 
+##   ST 22   ST 23   ST 24   ST 32   ST 33   ST 34   ST 41   ST 42   ST 43 
+##       1       3       3       2       1       1       3       3       1 
+##   ST 44   ST 45   ST 71   ST 72   ST 81   ST 82   ST 83   ST 84   ST 91 
+##       3       1       2       2       3       2       1       1       3 
+## 
+## Within cluster sum of squares by cluster:
+## [1] 19.57024 28.51670 14.97225
+##  (between_SS / total_SS =  39.4 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;    
+## [5] &quot;tot.withinss&quot; &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;        
+## [9] &quot;ifault&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fviz_cluster</span>(kmeans_clusters1, <span class="dt">data =</span> cluster_data, <span class="dt">main =</span> <span class="st">&quot;Tampines Period 1 with 3 centers&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-55"></span>
+<img src="bookdown-demo_files/figure-html/unnamed-chunk-55-1.png" alt="\label{fig:figs}K Means Plot Period 1 with 3 centers" width="672" />
+<p class="caption">
+Figure 6.11: K Means Plot Period 1 with 3 centers
+</p>
+</div>
+<p><img src="table%20cluster.png" alt="Table for CLusters" /> With Ctrl 7 fixed at cluster 4 according to the table, the clusters that did not change will be the reference points for comparison. Ave 5 and St 12 was similar to St 32 but changed in period 3 to the majority because larger flats were sold for St 12 in period 3 and Ave 5 has the new Tampines Hub that may impacted the flat price. Ave 5 is en-circling from Industrial Ave 3 to Simei, hence the effect is not easily found on geographic space. Ave 7 moved from being like the majority to St 32 in period 3 is likely the opening of Tampines East as the eastern part of St 32 lies the MRT station. Also, St 32 and Ave 7 are geographically close. Ave 8 and St 72 in period 2 becomes similar to St 11, St 22, St 83 and St 84 where they are further from the MRT station and near Angsana Primary School or Junyuan Secondary School. AVe 8 is near Springfield Secondary and St 72 is near Poi Ching exhibit similar characteristics of near a school that might explains the similarity. These streets are slightly far from the MRT station too. AVE9, ST33, ST34, ST43, ST45 are located at the northern part of Tampines which could be geographically similar and hence cluster groups are the same for 3 periods. A change in period 3 could be Tampines East MRT effect which is perpendicular to St 32 - period 3 reference point.</p>
+<p>There are some new findings from clustering that can be attributed by the 4 factors or other factors not considered in this study. Clustering is a useful tool to do other forms of research and uncover differen angles.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="method-1-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="discussion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/05-method2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
