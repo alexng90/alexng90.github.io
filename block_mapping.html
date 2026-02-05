@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block 890 - HSG Analytics</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f6f9; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        h1 { color: #1a73e8; margin-bottom: 5px; }
+
+        /* Summary Dashboard Styling */
+        .summary-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            width: 98%;
+            margin-bottom: 25px;
+        }
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 4px solid #007bff;
+        }
+        .stat-card h3 { margin: 0; font-size: 0.85rem; color: #666; text-transform: uppercase; }
+        .stat-card .value { font-size: 1.5rem; font-weight: bold; color: #333; margin-top: 5px; }
+        .stat-card.red-alert { border-top-color: #dc3545; }
+        .stat-card.red-alert .value { color: #dc3545; }
+
+        /* Table & Grid Styling */
+        table { border-collapse: collapse; background: white; width: 98%; table-layout: fixed; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        th, td { border: 1px solid #dee2e6; padding: 8px; vertical-align: top; }
+        th { background-color: #007bff; color: white; font-size: 13px; text-align: center; }
+        .floor-label { background-color: #e9ecef; font-weight: bold; width: 50px; text-align: center; vertical-align: middle; }
+
+        .resident-row { font-size: 0.75rem; border-bottom: 1px solid #f0f0f0; padding: 4px 0; display: flex; justify-content: space-between; }
+        .needs-attention { background-color: #fff5f5; }
+        
+        .legend { margin-top: 20px; display: flex; gap: 20px; font-size: 0.8rem; color: #555; }
+    </style>
+</head>
+<body>
+
+    <h1>Block 890</h1>
+
+    <div class="summary-container">
+        <div class="stat-card">
+            <h3>HSG Enrolled</h3>
+            <div id="hsg-pct" class="value">0%</div>
+        </div>
+        <div class="stat-card">
+            <h3>Diabetes (D)</h3>
+            <div id="d-pct" class="value">0%</div>
+        </div>
+        <div class="stat-card">
+            <h3>Hypertension (H)</h3>
+            <div id="h-pct" class="value">0%</div>
+        </div>
+        <div class="stat-card">
+            <h3>Lipid (L)</h3>
+            <div id="l-pct" class="value">0%</div>
+        </div>
+        <div class="stat-card red-alert">
+            <h3>Red Flags</h3>
+            <div id="red-flag-count" class="value">0</div>
+        </div>
+    </div>
+
+    <table id="buildingGrid">
+        <thead><tr id="headerRow"><th>Floor</th></tr></thead>
+        <tbody id="gridBody"></tbody>
+    </table>
+
+    <div class="legend">
+        <span>✅ HSG Enrolled</span> | <span>🚩 Monitoring Required</span> | <span>⛳ Managed Well</span> | <span>🏋️ Exercise</span>
+    </div>
+
+    <script>
+        const units = [123, 125, 127, 129, 131, 133, 135, 137];
+        const gridBody = document.getElementById('gridBody');
+        
+        // Counters for Summary
+        let totalAbove40 = 0;
+        let enrolledAbove40 = 0;
+        let countD = 0;
+        let countH = 0;
+        let countL = 0;
+        let totalRedFlags = 0;
+
+        // Create Header
+        units.forEach(u => {
+            let th = document.createElement('th');
+            th.innerText = u;
+            document.getElementById('headerRow').appendChild(th);
+        });
+
+        // Generate Floors
+        for (let f = 14; f >= 1; f--) {
+            let tr = document.createElement('tr');
+            let floorCell = document.createElement('td');
+            floorCell.innerText = f;
+            floorCell.className = 'floor-label';
+            tr.appendChild(floorCell);
+
+            units.forEach(u => {
+                let td = document.createElement('td');
+                const adultCount = Math.floor(Math.random() * 3) + 1;
+                let unitAlert = false;
+
+                for (let i = 0; i < adultCount; i++) {
+                    let gender = Math.random() > 0.5 ? 'M' : 'F';
+                    let age = (i === 0) ? Math.floor(Math.random() * 61) + 30 : Math.floor(Math.random() * 73) + 18;
+
+                    // Condition Generation
+                    let hasD = Math.random() > 0.85;
+                    let hasH = Math.random() > 0.75;
+                    let hasL = Math.random() > 0.80;
+                    let diseases = (hasD ? 'D' : '') + (hasH ? 'H' : '') + (hasL ? 'L' : '');
+                    
+                    let isHSG = age >= 40 && Math.random() > 0.4;
+                    let isRedFlag = diseases.length > 0 && Math.random() > 0.8;
+
+                    // Analytics Tallying
+                    if (age >= 40) {
+                        totalAbove40++;
+                        if (isHSG) enrolledAbove40++;
+                        if (hasD) countD++;
+                        if (hasH) countH++;
+                        if (hasL) countL++;
+                    }
+                    if (isRedFlag) {
+                        totalRedFlags++;
+                        unitAlert = true;
+                    }
+
+                    // Icon building
+                    let icons = (isHSG ? '✅' : '') + (isRedFlag ? '🚩' : '') + (Math.random() > 0.7 ? '🏋️' : '');
+                    
+                    td.innerHTML += `
+                        <div class="resident-row">
+                            <span>${gender}/${age}/${diseases}</span>
+                            <span>${icons}</span>
+                        </div>`;
+                }
+                if (unitAlert) td.className = 'needs-attention';
+                tr.appendChild(td);
+            });
+            gridBody.appendChild(tr);
+        }
+
+        // Update Summary Dashboard
+        const safePct = (part, total) => total === 0 ? 0 : Math.round((part / total) * 100);
+        
+        document.getElementById('hsg-pct').innerText = safePct(enrolledAbove40, totalAbove40) + "%";
+        document.getElementById('d-pct').innerText = safePct(countD, totalAbove40) + "%";
+        document.getElementById('h-pct').innerText = safePct(countH, totalAbove40) + "%";
+        document.getElementById('l-pct').innerText = safePct(countL, totalAbove40) + "%";
+        document.getElementById('red-flag-count').innerText = totalRedFlags;
+
+    </script>
+</body>
+</html>

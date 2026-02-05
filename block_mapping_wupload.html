@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Block 890 - Command Center</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .header-box { text-align: center; margin-bottom: 20px; }
+        
+        /* Dashboard Stats */
+        .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; width: 100%; max-width: 1200px; margin-bottom: 20px; }
+        .card { background: white; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-top: 5px solid #1a73e8; }
+        .card.red { border-top-color: #d93025; }
+        .card h3 { font-size: 0.7rem; color: #5f6368; text-transform: uppercase; margin: 0; }
+        .card .val { font-size: 1.6rem; font-weight: bold; display: block; margin-top: 5px; }
+
+        /* Controls */
+        .controls { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 20px; align-items: center; border: 1px solid #ddd; }
+        button { padding: 10px 15px; cursor: pointer; background: #1a73e8; color: white; border: none; border-radius: 5px; font-weight: bold; }
+        button:hover { background: #1557b0; }
+
+        /* The Grid */
+        table { border-collapse: collapse; background: white; width: 100%; max-width: 1200px; table-layout: fixed; }
+        th, td { border: 1px solid #dee2e6; padding: 8px; vertical-align: top; min-height: 60px; }
+        th { background: #1a73e8; color: white; padding: 10px; font-size: 0.8rem; }
+        .floor-col { background: #f8f9fa; font-weight: bold; width: 50px; text-align: center; vertical-align: middle; }
+        
+        .res-row { font-size: 0.75rem; border-bottom: 1px solid #eee; padding: 3px 0; display: flex; justify-content: space-between; }
+        .res-row:last-child { border-bottom: none; }
+        .alert-unit { background-color: #fce8e6 !important; }
+        
+        /* Legend */
+        .legend { background: white; width: 100%; max-width: 1200px; margin-top: 20px; padding: 15px; border-radius: 8px; display: flex; justify-content: space-around; font-size: 0.85rem; border: 1px solid #ddd; }
+
+        @media print { .controls, .header-box h1 { display: none; } }
+    </style>
+</head>
+<body>
+
+<div class="header-box">
+    <h1>Block 890 Healthier SG Dashboard</h1>
+</div>
+
+<div class="summary-grid" id="printableStats">
+    <div class="card"><h3>HSG Enrolled</h3><span id="stat-hsg" class="val">0%</span></div>
+    <div class="card"><h3>Diabetes (D)</h3><span id="stat-d" class="val">0%</span></div>
+    <div class="card"><h3>Hypertension (H)</h3><span id="stat-h" class="val">0%</span></div>
+    <div class="card"><h3>Lipids (L)</h3><span id="stat-l" class="val">0%</span></div>
+    <div class="card red"><h3>Red Flags</h3><span id="stat-red" class="val">0</span></div>
+</div>
+
+<div class="controls">
+    <div><strong>Upload Data:</strong> <input type="file" id="csvFile" accept=".csv" onchange="processCSV()"></div>
+    <button onclick="window.print()">Print Report for Minister</button>
+</div>
+
+<table id="buildingTable">
+    <thead><tr id="headRow"><th class="floor-col">FL</th></tr></thead>
+    <tbody id="gridBody"></tbody>
+</table>
+
+<div class="legend">
+    <span>✅ <strong>HSG:</strong> Enrolled (Age 40+)</span>
+    <span>🚩 <strong>Red Flag:</strong> Monitoring Required (Unmanaged)</span>
+    <span>⛳ <strong>Green Pin:</strong> Condition Well Managed</span>
+    <span>🏋️ <strong>Dumbbell:</strong> Regular Exercise Habit</span>
+    <span><strong>D/H/L:</strong> Diabetes / Hypertension / Lipid</span>
+</div>
+
+<script>
+    const units = [123, 125, 127, 129, 131, 133, 135, 137];
+    const headRow = document.getElementById('headRow');
+    const gridBody = document.getElementById('gridBody');
+
+    // Setup Table Grid
+    units.forEach(u => { let th = document.createElement('th'); th.innerText = 'Unit ' + u; headRow.appendChild(th); });
+    for (let f = 14; f >= 1; f--) {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `<td class="floor-col">${f}</td>`;
+        units.forEach(u => { tr.innerHTML += `<td id="U-${f}-${u}"></td>`; });
+        gridBody.appendChild(tr);
+    }
+
+    function drawData(dataList) {
+        units.forEach(u => { for(let f=1; f<=14; f++) { let c = document.getElementById(`U-${f}-${u}`); c.innerHTML = ""; c.classList.remove('alert-unit'); } });
+        let total40 = 0, hsg40 = 0, dCount = 0, hCount = 0, lCount = 0, redFlags = 0;
+
+        dataList.forEach(item => {
+            const cell = document.getElementById(`U-${item.floor}-${item.unit}`);
+            if(!cell) return;
+            if(item.age >= 40) {
+                total40++;
+                if(item.hsg === 'Yes') hsg40++;
+                if(item.diseases.includes('D')) dCount++;
+                if(item.diseases.includes('H')) hCount++;
+                if(item.diseases.includes('L')) lCount++;
+            }
+            let icons = (item.hsg === 'Yes' ? '✅' : '') + 
+                        (item.managed === 'No' && item.diseases ? '🚩' : '') + 
+                        (item.managed === 'Yes' ? '⛳' : '') + 
+                        (item.exercise === 'Yes' ? '🏋️' : '');
+            
+            if(item.managed === 'No' && item.diseases) { redFlags++; cell.classList.add('alert-unit'); }
+            cell.innerHTML += `<div class="res-row"><span>${item.gender}/${item.age}/${item.diseases}</span><span>${icons}</span></div>`;
+        });
+
+        const pct = (a, b) => b === 0 ? 0 : Math.round((a/b)*100);
+        document.getElementById('stat-hsg').innerText = pct(hsg40, total40) + "%";
+        document.getElementById('stat-d').innerText = pct(dCount, total40) + "%";
+        document.getElementById('stat-h').innerText = pct(hCount, total40) + "%";
+        document.getElementById('stat-l').innerText = pct(lCount, total40) + "%";
+        document.getElementById('stat-red').innerText = redFlags;
+    }
+
+    function processCSV() {
+        const file = document.getElementById('csvFile').files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const rows = e.target.result.split('\n').slice(1);
+            const list = rows.map(r => {
+                const c = r.split(',');
+                if(c.length < 8) return null;
+                return { floor: c[0].trim(), unit: c[1].trim(), gender: c[2].trim(), age: parseInt(c[3]), diseases: c[4].trim(), managed: c[5].trim(), exercise: c[6].trim(), hsg: c[7].trim() };
+            }).filter(x => x);
+            drawData(list);
+        };
+        reader.readAsText(file);
+    }
+
+    // Default Sample for Boss to see
+    drawData([{floor:14, unit:123, gender:'M', age:68, diseases:'D', managed:'No', exercise:'Yes', hsg:'Yes'}]);
+</script>
+</body>
+</html>
